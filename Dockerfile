@@ -29,7 +29,7 @@ RUN wget https://launchpad.net/~bitcoin/+archive/ubuntu/bitcoin/+build/15598385/
     wget https://launchpad.net/~bitcoin/+archive/ubuntu/bitcoin/+build/15598385/+files/libdb4.8-dbg_4.8.30-cosmic4_amd64.deb && \
     wget https://launchpad.net/~bitcoin/+archive/ubuntu/bitcoin/+build/15598385/+files/libdb4.8-dev_4.8.30-cosmic4_amd64.deb && \
     wget https://launchpad.net/~bitcoin/+archive/ubuntu/bitcoin/+build/15598385/+files/libdb4.8-tcl_4.8.30-cosmic4_amd64.deb && \
-    wget htts://launchpad.net/~bitcoin/+archive/ubuntu/bitcoin/+build/15598385/+files/libdb4.8_4.8.30-cosmic4_amd64.deb && \
+    wget https://launchpad.net/~bitcoin/+archive/ubuntu/bitcoin/+build/15598385/+files/libdb4.8_4.8.30-cosmic4_amd64.deb && \
     apt-get install -y ./*.deb && \
     rm -f *.deb
 
@@ -38,6 +38,8 @@ WORKDIR /
 RUN git clone https://github.com/bitcoinfibre/bitcoinfibre.git
 WORKDIR /bitcoinfibre
 RUN ./autogen.sh && ./configure --with-boost=$BOOST_ROOT && make -j"$(nproc)"
+
+ENV PATH="/bitcoinfibre/src:${PATH}"
 
 # -------- Set default entrypoint --------
 ENTRYPOINT ["/bin/bash"]
