@@ -19,6 +19,8 @@ debug=bench
 prune=550
 upnp=1
 externalip=<extarnal_ip>
+assumevalid=000000000000000000014348a2a22e1000287a88e47803cf24623c118afbda14
+dbcache=10240
 EOF
 
 $ docker run -d \
