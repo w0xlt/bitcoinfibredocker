@@ -8,6 +8,8 @@ $ cd bitcoinfibredocker
 
 $ mkdir ./bitcoin-data
 
+$ chmod 755 ./bitcoin-data
+
 $ cat > ./bitcoin-data/bitcoin.conf << EOF
 listen=1
 bind=0.0.0.0
@@ -22,6 +24,8 @@ externalip=<extarnal_ip>
 assumevalid=000000000000000000014348a2a22e1000287a88e47803cf24623c118afbda14
 dbcache=10240
 EOF
+
+$ docker build -t bitcoinfibre .
 
 $ docker run -d \
     -v $(pwd)/bitcoin-data:/root/.bitcoin \
