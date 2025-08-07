@@ -4,7 +4,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 ENV BOOST_ROOT=/opt/boost_1_64_0
 ENV BOOST_INCLUDEDIR=$BOOST_ROOT/include
 ENV BOOST_LIBRARYDIR=$BOOST_ROOT/lib
-ENV LD_LIBRARY_PATH=$BOOST_LIBRARYDIR:$LD_LIBRARY_PATH
+ENV LD_LIBRARY_PATH=$BOOST_LIBRARYDIR
 
 RUN apt-get update && \
     apt-get install -y wget gdebi-core git build-essential libtool autotools-dev automake pkg-config libssl-dev \
@@ -37,10 +37,4 @@ RUN wget https://launchpad.net/~bitcoin/+archive/ubuntu/bitcoin/+build/15598385/
 WORKDIR /
 RUN git clone https://github.com/bitcoinfibre/bitcoinfibre.git
 WORKDIR /bitcoinfibre
-RUN ./autogen.sh && ./configure --with-boost=$BOOST_ROOT && make -j"$(nproc)"
-
-ENV PATH="/bitcoinfibre/src:${PATH}"
-
-# -------- Set default entrypoint --------
-ENTRYPOINT ["/bin/bash"]
-
+RUN ./autogen.sh && ./configure --with-boost=$BOOST_ROOT && make
